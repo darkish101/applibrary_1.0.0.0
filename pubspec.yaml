@@ -37,6 +37,21 @@ dependencies:
   syncfusion_flutter_pdfviewer:
   flutter_sound_lite:
   audioplayers:
+  flutter_native_splash:
+  google_fonts:
+  firebase_core:
+  firebase_storage:
+  path_provider:
+  http:
+
+flutter_native_splash:
+  color: "#edddb4"
+  image: assets/Splash.png
+  android: true
+  ios: true
+  android_gravity: fill
+  ios_content_mode: scaleAspectFill
+
 
 dev_dependencies:
   flutter_test:

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "531812196822",
+    "project_id": "library-app-24784",
+    "storage_bucket": "library-app-24784.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531812196822:android:c69f6e7441c4177a7f8477",
+        "android_client_info": {
+          "package_name": "net.enseyab.applibrary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531812196822-n5nofjmbe93bag59vhva2nlevsi0lu5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWA7OlndjAHCvw2QZLShwkJMu_FpcGABs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531812196822-n5nofjmbe93bag59vhva2nlevsi0lu5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

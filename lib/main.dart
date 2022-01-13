@@ -1,9 +1,14 @@
+import 'package:applibrary/bookapi.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'books.dart';
+import 'indvBook.dart';
 import 'bookview.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+
   runApp(App_Library());
 }
 
@@ -12,11 +17,11 @@ class App_Library extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'HomeScreen',
+      initialRoute: 'Individual book',
       routes: {
-        'HomeScreen': (context) => HomeScreen(),
-        'BookScreen': (context) => BookScreen(),
         'BookView': (context) => BookView(),
+        'BookAPI': (context) => Book(),
+        'Individual book': (context) => IBook(),
       },
     );
   }
