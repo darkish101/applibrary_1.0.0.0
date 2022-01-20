@@ -39,8 +39,6 @@ dependencies:
   audioplayers:
   flutter_native_splash:
   google_fonts:
-  firebase_core:
-  firebase_storage:
   path_provider:
   http:
 

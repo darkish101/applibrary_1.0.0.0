@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:applibrary/indvBook.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:applibrary/model/Gene.dart';
@@ -53,63 +54,66 @@ class _BookState extends State<Book> {
         backgroundColor: Colors.brown,
         title: Text("Main Book page"),
       ),
-      backgroundColor: Color(0xFFdbd1b4),
+      backgroundColor: Color(0xfff8f6ec),
       body: FutureBuilder<List<Gene>>(
         future: books,
         builder: (context, snapShout) {
           if (snapShout.hasData) {
-            return Column(
-              children: [
-                Container(
-                  child: Stack(
-                    children: [
-                      TextField(
-                        textAlign: TextAlign.end,
-                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                        style: GoogleFonts.openSans(
-                          fontSize: 12,
-                          color: Colors.black45,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(right: 30),
-                          border: InputBorder.none,
-                          hintText: 'إبحث عن كتاب',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.brown,
-                              width: 2,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.brown,
-                              width: 2,
-                            ),
-                          ),
-                          filled: true,
-                          focusColor: Colors.white,
-                          fillColor: Colors.white,
-                          hintStyle: GoogleFonts.openSans(
-                            fontSize: 13,
-                            color: Colors.grey,
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    child: Stack(
+                      children: [
+                        TextField(
+                          textAlign: TextAlign.end,
+                          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                          style: GoogleFonts.openSans(
+                            fontSize: 12,
+                            color: Colors.black45,
                             fontWeight: FontWeight.w600,
                           ),
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(right: 30),
+                            border: InputBorder.none,
+                            hintText: 'إبحث عن كتاب',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.brown,
+                                width: 2,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.brown,
+                                width: 2,
+                              ),
+                            ),
+                            filled: true,
+                            focusColor: Colors.white,
+                            fillColor: Colors.white,
+                            hintStyle: GoogleFonts.openSans(
+                              fontSize: 13,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                         ),
-                      ),
-                      Positioned(left: 10, top: 8, child: Icon(Icons.search)),
-                    ],
+                        Positioned(left: 10, top: 8, child: Icon(Icons.search)),
+                      ],
+                    ),
+                    height: 39,
+                    margin: EdgeInsets.only(left: 25, right: 25, top: 18),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white),
                   ),
-                  height: 39,
-                  margin: EdgeInsets.only(left: 25, right: 25, top: 18),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 30),
-                  child: GridView.builder(
+                  Container(
+                    margin: EdgeInsets.only(top: 30),
+                    child: GridView.builder(
                       shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      scrollDirection: Axis.vertical,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
@@ -117,10 +121,11 @@ class _BookState extends State<Book> {
                       ),
                       itemCount: snapShout.data!.length,
                       itemBuilder: (context, index) {
+                        final VAY = "${snapShout.data![index].Book_ID}";
                         return GridTile(
                           child: InkWell(
-                            onTap: () =>
-                                Navigator.pushNamed(context, 'BookView'),
+                            onTap: () => Navigator.pushNamed(context, 'INDV',
+                                arguments: {VAY: ''}),
                             child: Ink.image(
                               image: NetworkImage(
                                 "${snapShout.data![index].Book_img}",
@@ -128,9 +133,11 @@ class _BookState extends State<Book> {
                             ),
                           ),
                         );
-                      }),
-                ),
-              ],
+                      },
+                    ),
+                  ),
+                ],
+              ),
             );
           }
           return Center(child: CircularProgressIndicator());
