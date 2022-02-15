@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-class AudioScreen extends StatefulWidget {
+class AudioScreen_OLD extends StatefulWidget {
   @override
-  State<AudioScreen> createState() => _AudioScreenState();
+  State<AudioScreen_OLD> createState() => _AudioScreen_OLDState();
 }
 
-class _AudioScreenState extends State<AudioScreen> {
+class _AudioScreen_OLDState extends State<AudioScreen_OLD> {
   AudioPlayer audioPlayer = AudioPlayer();
   Duration duration = Duration();
   Duration position = Duration();

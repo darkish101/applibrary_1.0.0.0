@@ -51,8 +51,15 @@ class _BookState extends State<Book> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown,
-        title: Text("Main Book page"),
+        backgroundColor: Color(0xff90816C),
+        title: Center(
+            child: Text(
+          "الصفحة الرئيسية",
+          style: GoogleFonts.cairo(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        )),
       ),
       backgroundColor: Color(0xfff8f6ec),
       body: FutureBuilder<List<Gene>>(
@@ -92,8 +99,8 @@ class _BookState extends State<Book> {
                             filled: true,
                             focusColor: Colors.white,
                             fillColor: Colors.white,
-                            hintStyle: GoogleFonts.openSans(
-                              fontSize: 13,
+                            hintStyle: GoogleFonts.cairo(
+                              fontSize: 14,
                               color: Colors.grey,
                               fontWeight: FontWeight.w600,
                             ),
@@ -121,11 +128,13 @@ class _BookState extends State<Book> {
                       ),
                       itemCount: snapShout.data!.length,
                       itemBuilder: (context, index) {
-                        final VAY = "${snapShout.data![index].Book_ID}";
                         return GridTile(
                           child: InkWell(
-                            onTap: () => Navigator.pushNamed(context, 'INDV',
-                                arguments: {VAY: ''}),
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => IBook(
+                                        bookalone: snapShout.data![index]))),
                             child: Ink.image(
                               image: NetworkImage(
                                 "${snapShout.data![index].Book_img}",
@@ -146,14 +155,3 @@ class _BookState extends State<Book> {
     );
   }
 }
-
-// Container(
-// height: 220,
-// width: 10,
-// decoration: BoxDecoration(
-// borderRadius: BorderRadius.circular(10),
-// image: DecorationImage(
-// image: NetworkImage(
-// "https://a-alqasim.com/wp-content/uploads/2021/04/0001AthkaarAlQasim.jpg"),
-// )),
-// ),

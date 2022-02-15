@@ -1,12 +1,11 @@
 import 'package:applibrary/bookapi.dart';
-
+import 'package:applibrary/model/Gene.dart';
+import 'package:applibrary/navbar.dart';
 import 'package:flutter/material.dart';
 import 'indvBook.dart';
 import 'bookview.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   runApp(App_Library());
 }
 
@@ -15,11 +14,10 @@ class App_Library extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'BookMain',
+      initialRoute: 'NAVI',
       routes: {
-        'BookView': (context) => BookView(),
         'BookMain': (context) => Book(),
-        'INDV': (context) => IBook(),
+        'NAVI': (context) => NavBar(),
       },
     );
   }
