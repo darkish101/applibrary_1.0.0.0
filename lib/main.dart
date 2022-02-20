@@ -1,5 +1,5 @@
 import 'package:applibrary/bookapi.dart';
-import 'package:applibrary/model/Gene.dart';
+import 'package:applibrary/model/BookObj.dart';
 import 'package:applibrary/navbar.dart';
 import 'package:flutter/material.dart';
 import 'indvBook.dart';

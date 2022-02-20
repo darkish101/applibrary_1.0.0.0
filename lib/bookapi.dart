@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:applibrary/indvBook.dart';
+import 'package:applibrary/model/RequestApi.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:applibrary/model/Gene.dart';
+import 'package:applibrary/model/BookObj.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class Book extends StatefulWidget {
 }
 
 class _BookState extends State<Book> {
-  Future<List<Gene>> getdata() async {
+  Future<List<BookObj>> getdata() async {
     var url = "http://books.waqaar.com/api/Books/GetAllBooks";
 
     var jsonData = await http.post(Uri.parse(url),
@@ -24,22 +25,35 @@ class _BookState extends State<Book> {
           "Access-Control-Allow-Methods": "GET"
         },
         body: jsonEncode(<String, dynamic>{"id": 0}));
+
+    // dynamic api = RequestApi();
+    //
+    // // RequestApi api = RequestApi(
+    // //   url: url,
+    // //   method: "GET",
+    // //   params: <String, dynamic>{"id": 0},
+    // // );
+    // api.url = url;
+    // api.method = "GET";
+    // api.params = {"id": 0};
+    // var jsonData = api.call();
+
     if (jsonData.statusCode == 200) {
       List data = jsonDecode(jsonData.body);
-      List<Gene> Books = [];
+      List<BookObj> books = [];
 
       for (var u in data) {
-        Gene gene = Gene.fromjson(u);
-        Books.add(gene);
+        BookObj gene = BookObj.fromjson(u);
+        books.add(gene);
       }
 
-      return Books;
+      return books;
     } else {
       throw Exception("Error in the json status");
     }
   }
 
-  late Future<List<Gene>> books;
+  late Future<List<BookObj>> books;
 
   @override
   void initState() {
@@ -62,7 +76,7 @@ class _BookState extends State<Book> {
         )),
       ),
       backgroundColor: Color(0xfff8f6ec),
-      body: FutureBuilder<List<Gene>>(
+      body: FutureBuilder<List<BookObj>>(
         future: books,
         builder: (context, snapShout) {
           if (snapShout.hasData) {
@@ -134,7 +148,7 @@ class _BookState extends State<Book> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => IBook(
-                                        bookalone: snapShout.data![index]))),
+                                        bookObj: snapShout.data![index]))),
                             child: Ink.image(
                               image: NetworkImage(
                                 "${snapShout.data![index].Book_img}",

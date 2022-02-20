@@ -1,4 +1,4 @@
-class Gene {
+class BookObj {
   final Book_ID;
   final Book_Name;
   final Book_Description;
@@ -8,7 +8,7 @@ class Gene {
   final Pdf_URL;
   final has_Audio;
 
-  Gene(
+  BookObj(
       {required this.Book_ID,
       required this.Book_Name,
       required this.Book_Description,
@@ -18,8 +18,8 @@ class Gene {
       required this.Pdf_URL,
       required this.has_Audio});
 
-  factory Gene.fromjson(Map<String, dynamic> parsedjson) {
-    return Gene(
+  factory BookObj.fromjson(Map<String, dynamic> parsedjson) {
+    return BookObj(
       Book_ID: parsedjson["Book_ID"],
       Book_Name: parsedjson["Book_Name"],
       Book_Description: parsedjson["Book_Description"],
