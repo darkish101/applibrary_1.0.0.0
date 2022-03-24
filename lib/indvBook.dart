@@ -1,3 +1,4 @@
+import 'package:applibrary/audioList.dart';
 import 'package:applibrary/audioscreen.dart';
 import 'package:applibrary/bookview.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -151,7 +152,7 @@ class _IBookState extends State<IBook> {
                                   onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => AudioScreen(
+                                          builder: (context) => MidAudioList(
                                                 Book_ID: bookObj.Book_ID,
                                                 Book_Img: bookObj.Book_img,
                                                 Book_Name: bookObj.Book_Name,

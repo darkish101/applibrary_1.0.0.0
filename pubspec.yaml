@@ -38,9 +38,11 @@ dependencies:
   flutter_sound_lite:
   audioplayers:
   flutter_native_splash:
-  google_fonts:
+  google_fonts: 2.1.1
   path_provider:
   http:
+  sliding_up_panel: ^2.0.0+1
+
 
 flutter_native_splash:
   color: "#edddb4"
