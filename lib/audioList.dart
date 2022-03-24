@@ -81,12 +81,14 @@ class _MidAudioListState extends State<MidAudioList> {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       return Card(
-                        clipBehavior: Clip.antiAlias,
                         margin: EdgeInsets.fromLTRB(20, 20, 20, 5),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
+                          borderRadius: BorderRadius.circular(16),
+                          side: BorderSide(color: Color(0xff90816c), width: 1),
+                        ),
                         elevation: 20,
                         child: Container(
+                          margin: EdgeInsets.only(left: 20),
                           child: Row(
                             children: [
                               ElevatedButton(
