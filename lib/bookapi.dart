@@ -142,16 +142,27 @@ class _BookState extends State<Book> {
                       ),
                       itemCount: snapShout.data!.length,
                       itemBuilder: (context, index) {
-                        return GridTile(
-                          child: InkWell(
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => IBook(
-                                        bookObj: snapShout.data![index]))),
-                            child: Ink.image(
-                              image: NetworkImage(
-                                "${snapShout.data![index].Book_img}",
+                        return InkWell(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      IBook(bookObj: snapShout.data![index]))),
+                          child: Card(
+                            elevation: 13,
+                            shadowColor: Colors.brown,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: BorderSide(color: Colors.brown, width: 1),
+                            ),
+                            margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                            child: GridTile(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  snapShout.data![index].Book_img,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
                           ),

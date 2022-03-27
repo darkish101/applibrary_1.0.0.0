@@ -29,7 +29,7 @@ class AudioScreen extends StatefulWidget {
 
 class _AudioScreenState extends State<AudioScreen> {
   Future<List<AudioObj>> getdata() async {
-    var url = "http://books.waqaar.com/api/Audio/GetIndividual_Audio";
+    var url = "http://books.waqaar.com/api/Audio/GetAudioById";
 
     var jsonData = await http.post(Uri.parse(url),
         headers: <String, String>{
@@ -101,13 +101,25 @@ class _AudioScreenState extends State<AudioScreen> {
               child: Column(
                 children: [
                   Container(
-                    height: 200,
-                    width: 200,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: NetworkImage("${Book_Img}"),
-                        )),
+                    decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 10,
+                          spreadRadius: 5,
+                          offset: Offset(3, 3),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        Book_Img,
+                        height: 210,
+                        width: 160,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ),
                   SizedBox(height: 25),
                   Text(
