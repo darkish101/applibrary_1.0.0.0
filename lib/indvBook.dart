@@ -1,5 +1,4 @@
 import 'package:applibrary/audioList.dart';
-import 'package:applibrary/audioscreen.dart';
 import 'package:applibrary/bookview.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:applibrary/model/BookObj.dart';
@@ -38,10 +37,11 @@ class _IBookState extends State<IBook> {
                 itemCount: 1,
                 itemBuilder: (context, index) {
                   return Container(
+                    margin: EdgeInsets.only(right: 10),
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 23),
+                          margin: EdgeInsets.only(left: 10),
                           child: Row(
                             children: [
                               Expanded(
@@ -136,7 +136,12 @@ class _IBookState extends State<IBook> {
                                     primary: Color(0xff90816C),
                                     minimumSize: Size(50, 30),
                                   ),
-                                  child: Text("تحميل"),
+                                  child: Text("تحميل",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.cairo(
+                                      fontSize: 12,
+                                      color: Colors.white,
+                                    ),),
                                   onPressed: () =>
                                       Navigator.pushNamed(context, 'BookView'),
                                 ),
@@ -148,7 +153,12 @@ class _IBookState extends State<IBook> {
                                     primary: Color(0xff90816C),
                                     minimumSize: Size(50, 30),
                                   ),
-                                  child: Text("إستماع"),
+                                  child: Text("إستماع",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.cairo(
+                                      fontSize: 12,
+                                      color: Colors.white,
+                                    ),),
                                   onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -167,7 +177,12 @@ class _IBookState extends State<IBook> {
                                       primary: Color(0xff90816C),
                                       minimumSize: Size(50, 30),
                                     ),
-                                    child: Text("قراءة"),
+                                    child: Text("قراءة",
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.cairo(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                      ),),
                                     onPressed: () => Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -184,8 +199,18 @@ class _IBookState extends State<IBook> {
                           ),
                         ),
                         SizedBox(height: 30),
-                        Text("عن الكتاب"),
-                        Text("${bookObj.Book_Description}"),
+                        Text("عن الكتاب",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.cairo(
+                            fontSize: 15,
+                            color: Colors.grey,
+                          ),),
+                        Text("${bookObj.Book_Description}",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.cairo(
+                            fontSize: 16,
+                            color: Colors.brown,
+                          ),),
                       ],
                     ),
                   );
