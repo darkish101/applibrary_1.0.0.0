@@ -26,18 +26,6 @@ class _BookState extends State<Book> {
         },
         body: jsonEncode(<String, dynamic>{"id": 0}));
 
-    // dynamic api = RequestApi();
-    //
-    // // RequestApi api = RequestApi(
-    // //   url: url,
-    // //   method: "GET",
-    // //   params: <String, dynamic>{"id": 0},
-    // // );
-    // api.url = url;
-    // api.method = "GET";
-    // api.params = {"id": 0};
-    // var jsonData = api.call();
-
     if (jsonData.statusCode == 200) {
       List data = jsonDecode(jsonData.body);
       List<BookObj> books = [];
@@ -76,106 +64,114 @@ class _BookState extends State<Book> {
         )),
       ),
       backgroundColor: Color(0xfff8f6ec),
-      body: FutureBuilder<List<BookObj>>(
-        future: books,
-        builder: (context, snapShout) {
-          if (snapShout.hasData) {
-            return SingleChildScrollView(
-              child: Column(
+      body: Container(
+        child: Column(
+          children: [
+            Container(
+              child: Stack(
                 children: [
-                  Container(
-                    child: Stack(
-                      children: [
-                        TextField(
-                          textAlign: TextAlign.end,
-                          maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                          style: GoogleFonts.openSans(
-                            fontSize: 12,
-                            color: Colors.black45,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(right: 30),
-                            border: InputBorder.none,
-                            hintText: 'إبحث عن كتاب',
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.brown,
-                                width: 2,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.brown,
-                                width: 2,
-                              ),
-                            ),
-                            filled: true,
-                            focusColor: Colors.white,
-                            fillColor: Colors.white,
-                            hintStyle: GoogleFonts.cairo(
-                              fontSize: 14,
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                  TextField(
+                    textAlign: TextAlign.end,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    style: GoogleFonts.openSans(
+                      fontSize: 12,
+                      color: Colors.black45,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(right: 30),
+                      border: InputBorder.none,
+                      hintText: 'إبحث عن كتاب',
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.brown,
+                          width: 2,
                         ),
-                        Positioned(left: 10, top: 8, child: Icon(Icons.search)),
-                      ],
-                    ),
-                    height: 39,
-                    margin: EdgeInsets.only(left: 25, right: 25, top: 18),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 30),
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: ScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 20,
                       ),
-                      itemCount: snapShout.data!.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      IBook(bookObj: snapShout.data![index]))),
-                          child: Card(
-                            elevation: 13,
-                            shadowColor: Colors.brown,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(color: Colors.brown, width: 1),
-                            ),
-                            margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                            child: GridTile(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  snapShout.data![index].Book_img,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.brown,
+                          width: 2,
+                        ),
+                      ),
+                      filled: true,
+                      focusColor: Colors.white,
+                      fillColor: Colors.white,
+                      hintStyle: GoogleFonts.cairo(
+                        fontSize: 14,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
+                  Positioned(left: 10, top: 8, child: Icon(Icons.search)),
                 ],
               ),
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        },
+              height: 39,
+              margin: EdgeInsets.only(left: 25, right: 25, top: 18, bottom: 10),
+            ),
+            Expanded(
+              child: FutureBuilder<List<BookObj>>(
+                future: books,
+                builder: (context, snapShout) {
+                  if (snapShout.hasData) {
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 30),
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              physics: ScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                mainAxisSpacing: 20,
+                              ),
+                              itemCount: snapShout.data!.length,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => IBook(
+                                              bookObj:
+                                                  snapShout.data![index]))),
+                                  child: Card(
+                                    elevation: 13,
+                                    shadowColor: Colors.brown,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      side: BorderSide(
+                                          color: Colors.brown, width: 1),
+                                    ),
+                                    margin:
+                                        const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                                    child: GridTile(
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(
+                                          snapShout.data![index].Book_img,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator());
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

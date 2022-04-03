@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'model/BookObj.dart';
 import 'model/AudioObj.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'panel_widget.dart';
@@ -27,7 +26,8 @@ class AudioScreen extends StatefulWidget {
       _AudioScreenState(Book_Img, Book_Name, Book_ID, Audio_ID);
 }
 
-class _AudioScreenState extends State<AudioScreen> {
+class _AudioScreenState extends State<AudioScreen>
+    with AutomaticKeepAliveClientMixin<AudioScreen> {
   Future<List<AudioObj>> getdata() async {
     var url = "http://books.waqaar.com/api/Audio/GetAudioById";
 
@@ -35,9 +35,9 @@ class _AudioScreenState extends State<AudioScreen> {
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Access-Control-Allow-Origin': "*",
-          "Access-Control-Allow-Methods": "POST"
+          "Access-Control-Allow-Methods": "GET"
         },
-        body: jsonEncode(<String, dynamic>{"Audio_ID": Audio_ID}));
+        body: jsonEncode(<String, dynamic>{"id": Audio_ID}));
 
     if (jsonData.statusCode == 200) {
       List data = jsonDecode(jsonData.body);
@@ -83,82 +83,85 @@ class _AudioScreenState extends State<AudioScreen> {
           backgroundColor: Color(0xff90816C),
           title: Text("Audio screen"),
         ),
-        body: SlidingUpPanel(
-          color: Color(0xff90816C),
-          controller: panelController,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
-          parallaxEnabled: true,
-          parallaxOffset: .5,
-          minHeight: MediaQuery.of(context).size.height * 0.07,
-          maxHeight: MediaQuery.of(context).size.height * 0.8,
-          panelBuilder: (controller) => PanelWidget(
-            controller: controller,
-            panelController: panelController,
-          ),
-          body: Container(
-            margin: EdgeInsets.only(top: 40),
-            child: Center(
-              child: Column(
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 10,
-                          spreadRadius: 5,
-                          offset: Offset(3, 3),
-                        ),
-                      ],
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        Book_Img,
-                        height: 210,
-                        width: 160,
-                        fit: BoxFit.fill,
+        body: Container(
+          margin: EdgeInsets.only(top: 50),
+          child: Center(
+            child: Column(
+              children: [
+                // Container(
+                //   margin: EdgeInsets.only(right: 350),
+                //   child: IconButton(
+                //     color: Colors.brown,
+                //     icon: Icon(
+                //       Icons.arrow_back,
+                //     ),
+                //     onPressed: () {
+                //       Navigator.pop(context);
+                //     },
+                //   ),
+                // ),
+                // SizedBox(height: 30),
+                Container(
+                  decoration: const BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 10,
+                        spreadRadius: 5,
+                        offset: Offset(3, 3),
                       ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      Book_Img,
+                      height: 210,
+                      width: 160,
+                      fit: BoxFit.fill,
                     ),
                   ),
-                  SizedBox(height: 25),
-                  Text(
-                    "${Book_Name}",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.cairo(
-                      fontSize: 20,
-                      color: Colors.brown,
-                    ),
+                ),
+                SizedBox(height: 25),
+                Text(
+                  "${Book_Name}",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.cairo(
+                    fontSize: 20,
+                    color: Colors.brown,
                   ),
-                  SizedBox(height: 25),
-                  FutureBuilder<List<AudioObj>>(
-                      future: Audios,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Expanded(
-                            child: ListView.builder(
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (listContext, index) {
-                                  return AudioFile(
-                                    advancedPlayer: advancedPlayer,
-                                    AudioObjf: snapshot.data![index],
-                                    Url: snapshot.data![index].Audio_URL,
-                                    Name: snapshot.data![index].Audio_Name,
-                                    Sec: snapshot.data![index].Section_Name,
-                                    Desc: snapshot.data![index].Description,
-                                    Length: snapshot.data!.length,
-                                  );
-                                }),
-                          );
-                        }
-                        return Center(child: CircularProgressIndicator());
-                      }),
-                ],
-              ),
+                ),
+                SizedBox(height: 25),
+                FutureBuilder<List<AudioObj>>(
+                    future: Audios,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Expanded(
+                          child: ListView.builder(
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (listContext, index) {
+                                return AudioFile(
+                                  advancedPlayer: advancedPlayer,
+                                  AudioObjf: snapshot.data![index],
+                                  Url: snapshot.data![index].Audio_URL,
+                                  Name: snapshot.data![index].Audio_Name,
+                                  Sec: snapshot.data![index].Section_Name,
+                                  Desc: snapshot.data![index].Description,
+                                  Length: snapshot.data!.length,
+                                );
+                              }),
+                        );
+                      }
+                      return Center(child: CircularProgressIndicator());
+                    }),
+              ],
             ),
           ),
         ),
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

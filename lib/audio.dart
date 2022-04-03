@@ -53,7 +53,7 @@ class _AudioFileState extends State<AudioFile> {
   bool isPlaying = false;
   bool isPaused = false;
   bool isRepeat = false;
-  Color color = Colors.brown;
+  Color color = Color(0xff90816C);
   List<IconData> _icons = [
     Icons.play_circle_fill,
     Icons.pause_circle_filled,
@@ -91,12 +91,12 @@ class _AudioFileState extends State<AudioFile> {
           ? Icon(
               _icons[0],
               size: 50,
-              color: Colors.brown,
+              color: Color(0xff90816C),
             )
           : Icon(
               _icons[1],
               size: 50,
-              color: Colors.brown,
+              color: Color(0xff90816C),
             ),
       onPressed: () {
         if (isPlaying == false) {
@@ -116,7 +116,7 @@ class _AudioFileState extends State<AudioFile> {
 
   Widget slider() {
     return Slider(
-        activeColor: Colors.brown,
+        activeColor: Color(0xff90816C),
         inactiveColor: Colors.grey,
         value: _position.inSeconds.toDouble(),
         min: 0.0,
@@ -133,7 +133,7 @@ class _AudioFileState extends State<AudioFile> {
     return IconButton(
       icon: Icon(Icons.skip_next),
       iconSize: 40,
-      color: Colors.brown,
+      color: Color(0xff90816C),
       onPressed: () {
         setState(() {});
       },
@@ -144,7 +144,7 @@ class _AudioFileState extends State<AudioFile> {
     return IconButton(
       icon: Icon(Icons.skip_previous),
       iconSize: 40,
-      color: Colors.brown,
+      color: Color(0xff90816C),
       onPressed: () {
         setState(() {});
       },
@@ -167,7 +167,7 @@ class _AudioFileState extends State<AudioFile> {
           this.widget.advancedPlayer.setReleaseMode(ReleaseMode.RELEASE);
           setState(() {
             isRepeat = false;
-            color = Colors.brown;
+            color = Color(0xff90816C);
           });
         }
       },
@@ -194,31 +194,31 @@ class _AudioFileState extends State<AudioFile> {
     );
   }
 
-  Widget playList() {
-    return SizedBox(
-      height: 80,
-      width: 250,
-      child: ListView.builder(
-        itemCount: 1,
-        itemBuilder: (context, index) {
-          return Card(
-            elevation: 5,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text("${Name}"),
-                  Text("${Sec}"),
-                  Text("${Desc}"),
-                  Text("${Url}"),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
+  // Widget playList() {
+  //   return SizedBox(
+  //     height: 80,
+  //     width: 250,
+  //     child: ListView.builder(
+  //       itemCount: 1,
+  //       itemBuilder: (context, index) {
+  //         return Card(
+  //           elevation: 5,
+  //           child: Padding(
+  //             padding: EdgeInsets.all(8.0),
+  //             child: Column(
+  //               children: [
+  //                 Text("${Name}"),
+  //                 Text("${Sec}"),
+  //                 Text("${Desc}"),
+  //                 Text("${Url}"),
+  //               ],
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -243,8 +243,8 @@ class _AudioFileState extends State<AudioFile> {
           ),
           slider(),
           loadAsset(),
-          SizedBox(height: 20),
-          playList(),
+          // SizedBox(height: 20),
+          // playList(),
         ],
       ),
     );

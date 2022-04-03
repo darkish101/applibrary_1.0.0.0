@@ -22,7 +22,8 @@ class MidAudioList extends StatefulWidget {
       _MidAudioListState(Book_Img, Book_Name, Book_ID);
 }
 
-class _MidAudioListState extends State<MidAudioList> {
+class _MidAudioListState extends State<MidAudioList>
+    with AutomaticKeepAliveClientMixin {
   final Book_Img;
   final Book_Name;
   final Book_ID;
@@ -36,7 +37,7 @@ class _MidAudioListState extends State<MidAudioList> {
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Access-Control-Allow-Origin': "*",
-          "Access-Control-Allow-Methods": "POST"
+          "Access-Control-Allow-Methods": "GET"
         },
         body: jsonEncode(<String, dynamic>{"id": Book_ID}));
 
@@ -88,14 +89,14 @@ class _MidAudioListState extends State<MidAudioList> {
                         ),
                         elevation: 20,
                         child: Container(
-                          margin: EdgeInsets.only(left: 20),
+                          margin: EdgeInsets.only(left: 10),
                           child: Row(
                             children: [
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   elevation: 10,
                                   primary: Color(0xff90816C),
-                                  minimumSize: Size(50, 30),
+                                  minimumSize: Size(0, 30),
                                 ),
                                 child: Text(
                                   "إستماع",
@@ -116,7 +117,7 @@ class _MidAudioListState extends State<MidAudioList> {
                                                   .data![index].Audio_ID,
                                             ))),
                               ),
-                              SizedBox(width: 190),
+                              SizedBox(width: 170),
                               Text(
                                 "${snapshot.data![index].Audio_Name}",
                                 textAlign: TextAlign.center,
@@ -162,4 +163,7 @@ class _MidAudioListState extends State<MidAudioList> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
